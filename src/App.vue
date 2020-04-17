@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Grid />
-    <InteractiveBox />
-    <InteractiveBox />
+    <InteractiveBox mode="non-crossed" />
+    <InteractiveBox mode="crossed" />
   </div>
 </template>
 
@@ -26,6 +26,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100vh;
+  height: 165px;
 }
 </style>

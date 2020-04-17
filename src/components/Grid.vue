@@ -1,6 +1,6 @@
 <template>
   <div class="grid-container">
-    <div v-for="index in 10" :key="index" :class="`row row-${index}`">
+    <div v-for="index in 3" :key="index" :class="`row row-${index}`">
       <div
         v-for="index in itemPerRow"
         :key="index"
@@ -15,9 +15,9 @@ export default {
   name: "Grid",
   data() {
     return {
-      itemPerRow: 30,
+      itemPerRow: 12,
       itemWidth: "40px",
-      itemHeight: "50px",
+      itemHeight: "40px",
     };
   },
 };
@@ -29,7 +29,8 @@ export default {
   flex-direction: column;
   position: absolute;
   top: 0;
-  left: 0;
+  border: 1px solid orange;
+  padding: 0 4rem;
 }
 
 .row {

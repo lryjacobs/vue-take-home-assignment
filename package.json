@@ -10,9 +10,11 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "interactjs": "^1.9.9",
+    "nuxt": "^2.12.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {
+    "@nuxt/typescript-build": "^0.6.5",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-service": "~4.3.0",

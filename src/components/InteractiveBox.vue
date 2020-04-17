@@ -1,5 +1,7 @@
 <template>
-  <div ref="myDraggable" class="draggable"></div>
+  <div ref="box" class="box" :class="{ crossed: isCrossed }">
+    <span v-if="!isCrossed">Write something here...</span>
+  </div>
 </template>
 
 <script>
@@ -12,10 +14,20 @@ export default {
       screenY: 0,
     };
   },
-  mounted: function() {
-    let myDraggable = this.$refs.myDraggable;
-    this.initInteract(myDraggable);
+
+  props: ["mode"],
+
+  computed: {
+    isCrossed: function() {
+      return this.mode === "crossed";
+    },
   },
+
+  mounted: function() {
+    let box = this.$refs.box;
+    this.initInteract(box);
+  },
+
   methods: {
     initInteract: function(selector) {
       interact(selector)
@@ -38,7 +50,7 @@ export default {
 
           modifiers: [
             interact.modifiers.snap({
-              targets: [interact.createSnapGrid({ x: 50, y: 50 })],
+              targets: [interact.createSnapGrid({ x: 60, y: 60 })],
               range: Infinity,
               relativePoints: [{ x: 0, y: 0 }],
             }),
@@ -53,7 +65,7 @@ export default {
           edges: { left: true, right: true, bottom: true, top: true },
           modifiers: [
             interact.modifiers.snap({
-              targets: [interact.createSnapGrid({ x: 50, y: 50 })],
+              targets: [interact.createSnapGrid({ x: 60, y: 60 })],
               range: Infinity,
               relativePoints: [{ x: 0, y: 0 }],
             }),
@@ -82,10 +94,6 @@ export default {
 
               target.setAttribute("data-x", x);
               target.setAttribute("data-y", y);
-              // target.textContent =
-              //   Math.round(event.rect.width) +
-              //   "\u00D7" +
-              //   Math.round(event.rect.height);
             },
           },
         });
@@ -120,12 +128,47 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.draggable {
+.box {
   width: 100px;
   height: 100px;
-  background-color: lightgray;
-  color: #fff;
+  background-color: white;
   padding: 5px;
   position: absolute;
+  opacity: 0.8;
+  left: 80px;
+  font-size: 11px;
+  color: gray;
+  border: 1px dotted;
+}
+
+.box:hover {
+  background-color: lightgray;
+  opacity: 0.7;
+}
+
+.crossed {
+  left: 500px;
+  background-color: lightgray;
+  background-image: linear-gradient(
+      to top left,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) calc(50% - 0.8px),
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) calc(50% + 0.8px),
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(
+      to top right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) calc(50% - 0.8px),
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) calc(50% + 0.8px),
+      rgba(0, 0, 0, 0) 100%
+    );
+  opacity: 0.7;
+}
+
+.crossed:hover {
+  opacity: 0.8;
 }
 </style>
